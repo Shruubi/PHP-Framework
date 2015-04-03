@@ -9,6 +9,9 @@ require_once('../src/IvyStreet/AutoLoader/AutoLoader.php');
 //include the configuration
 require_once('../config/config.php');
 
+//load doctrine ORM
+require_once('../src/IvyStreet/DB/bootstrap.php');
+
 //instantiate autoloader
 $autoloader = new \IvyStreet\AutoLoader\AutoLoader();
 

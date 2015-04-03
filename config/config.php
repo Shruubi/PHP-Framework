@@ -7,6 +7,8 @@
  */
 $MODE = 0;
 
+$HOMEPATH = dirname(__FILE__) . "/../";
+
 if($MODE === 0) {
 	require_once('dev/db-config.php');
 } else if($MODE === 1) {
