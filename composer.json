@@ -1,0 +1,19 @@
+{
+  "name": "IvyStreet/BaseFramework",
+  "description": "Base framework for building real-estate development websites",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Damon Swayn",
+      "email": "damon@ivystreet.com.au"
+    }
+  ],
+  "require": {
+    "doctrine/orm": "2.4.*",
+    "symfony/yaml": "2.*"
+  },
+  "autoload": {
+    "psr-0": {"": "src/"}
+  }
+}
