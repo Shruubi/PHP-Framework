@@ -7,11 +7,23 @@
  * params - a hash which will name each param in the supplied order
  */
 
+$HOME_ROUTE = '/^(?:\/)$/';
+$PARAMS = '(\/.*)*?';
+
 $routes = array(
 	array(
-		'path' => '/^(?:\/)$/',
+		'path' => $HOME_ROUTE,
 		'controller' => 'controllers\\TestController',
 		'action' => 'index',
 		'params' => array()
+	),
+	array(
+		'path' => '/^\/hello'.$PARAMS.'$/',
+		'controller' => 'controllers\\TestController',
+		'action' => 'withArgs',
+		'params' => array(
+			'arg1',
+			'arg2'
+		)
 	)
 );

@@ -2,6 +2,7 @@
 
 namespace IvyStreet\Router;
 
+use IvyStreet\Router\Exceptions\ParameterMismatchException;
 
 class Route {
 
@@ -84,6 +85,41 @@ class Route {
 		$action = $this->action;
 
 		$controllerObject = new $controller();
-		$controllerObject->$action();
+
+		$args = $this->parseArguments();
+		$controllerObject->$action($args);
+	}
+
+	/**
+	 * @return array
+	 */
+	private function parseArguments() {
+		$result = array();
+
+		//refactor this later to not reference a global?
+		preg_match($this->path, $_SERVER['REQUEST_URI'], $matches);
+
+		if(count($this->params) > 0 && count($matches) > 1) {
+			$paramValues = $this->extractParamValuesFromRegexMatch($matches);
+
+			for ($i = 0; $i < count($this->params); $i++) {
+				$result[$this->params[$i]] = $paramValues[$i];
+			}
+
+			$unnamed = array_slice($paramValues, count($result));
+			$result["unnamed"] = $unnamed;
+		}
+
+		return $result;
+	}
+
+	/**
+	 * @param $matches
+	 * @return array
+	 */
+	private function extractParamValuesFromRegexMatch($matches) {
+		$paramMatch = $matches[1];
+		$paramValues = array_slice(explode('/', $paramMatch), 1);
+		return $paramValues;
 	}
 }
