@@ -27,11 +27,15 @@ class BaseController {
 	protected function render($viewName, $templateName = null, $vars = null) {
 		$HOME = DIContainer::getInstance()->getObject("homeDir");
 
+		$renderPartial = function($partialName) use($HOME) {
+			include_once($HOME . 'app/partials/' . $partialName . '.php');
+		};
+
 		if($templateName === null) {
 			extract($vars, EXTR_SKIP);
 			include_once($HOME . 'app/views/' . $viewName . '.php');
 		} else {
-			$renderBody = function() use ($viewName, $HOME, $vars) {
+			$renderBody = function() use ($viewName, $HOME, $vars, $renderPartial) {
 				extract($vars, EXTR_SKIP);
 				include_once($HOME . 'app/views/' . $viewName . '.php');
 			};
