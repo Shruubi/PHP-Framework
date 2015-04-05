@@ -2,8 +2,6 @@
 
 namespace IvyStreet\Router;
 
-use IvyStreet\Router\Exceptions\ParameterMismatchException;
-
 class Route {
 
 	/**
