@@ -24,12 +24,18 @@ foreach($autoload_dirs as $dir) {
 $autoloader->beginAutoload();
 
 use IvyStreet\Container\DIContainer;
+use IvyStreet\Container\Services\Factory\ServiceContainerFactory;
 use IvyStreet\Router\Exceptions\UnmatchedRouteException;
 use IvyStreet\Router\Route;
 use IvyStreet\Router\Router;
 
 //register top level directory in DI container
 DIContainer::getInstance()->registerObject("homeDir", $HOMEPATH);
+DIContainer::getInstance()->registerRepositories($REPOS);
+
+//load the services auto-registrar
+$serviceContainerFactory = new ServiceContainerFactory($SERVICES);
+$serviceContainerFactory->register(DIContainer::getInstance());
 
 //create our router
 $router = new Router($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

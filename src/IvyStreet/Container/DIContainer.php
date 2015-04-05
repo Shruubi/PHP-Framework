@@ -46,4 +46,14 @@ class DIContainer {
 	public function containsObject($name) {
 		return array_key_exists($name, $this->containerHash) && $this->containerHash[$name] !== null;
 	}
+
+	public function registerRepositories(array $repoConfigArray) {
+		foreach($repoConfigArray as $repoConfig) {
+			$name = $repoConfig['name'];
+			$class = $repoConfig['class'];
+			$entityManager = $this->getObject($repoConfig['entityManagerName']);
+
+			$this->registerObject($name, new $class($entityManager));
+		}
+	}
 }

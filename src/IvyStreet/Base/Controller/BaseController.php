@@ -22,14 +22,17 @@ class BaseController {
 	/**
 	 * @param string $viewName
 	 * @param string $templateName
+	 * @param array $vars
 	 */
-	protected function render($viewName, $templateName = null) {
+	protected function render($viewName, $templateName = null, $vars = null) {
 		$HOME = DIContainer::getInstance()->getObject("homeDir");
 
 		if($templateName === null) {
+			extract($vars, EXTR_SKIP);
 			include_once($HOME . 'app/views/' . $viewName . '.php');
 		} else {
-			$renderBody = function() use ($viewName, $HOME) {
+			$renderBody = function() use ($viewName, $HOME, $vars) {
+				extract($vars, EXTR_SKIP);
 				include_once($HOME . 'app/views/' . $viewName . '.php');
 			};
 

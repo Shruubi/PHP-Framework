@@ -25,3 +25,7 @@ $autoload_dirs = array(
 
 //load in the routes config file
 require_once('routes.php');
+
+//load in DI config
+require_once('repos.php');
+require_once('services.php');
