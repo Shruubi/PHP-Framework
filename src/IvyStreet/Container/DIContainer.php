@@ -42,4 +42,8 @@ class DIContainer {
 	public function getObject($name) {
 		return $this->containerHash[$name];
 	}
+
+	public function containsObject($name) {
+		return array_key_exists($name, $this->containerHash) && $this->containerHash[$name] !== null;
+	}
 }

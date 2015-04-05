@@ -55,4 +55,25 @@ class Router {
 		//if no match is found then throw an exception
 		throw new UnmatchedRouteException("could not match request URI with a configured route.");
 	}
+
+	/**
+	 * @return string
+	 */
+	public function getRequestUri() {
+		return $this->requestUri;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getRequestMethod() {
+		return $this->requestMethod;
+	}
+
+	/**
+	 * @return integer
+	 */
+	public function getNumberOfRoutes() {
+		return count($this->routes);
+	}
 }

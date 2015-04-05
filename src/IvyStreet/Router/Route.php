@@ -86,6 +86,9 @@ class Route {
 
 		$args = $this->parseArguments();
 		$controllerObject->$action($args);
+
+		//return true to make this testable
+		return true;
 	}
 
 	/**
