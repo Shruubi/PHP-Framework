@@ -23,9 +23,13 @@ foreach($autoload_dirs as $dir) {
 //begin autoloading as needed, from here on out we can include via namespaces
 $autoloader->beginAutoload();
 
+use IvyStreet\Container\DIContainer;
 use IvyStreet\Router\Exceptions\UnmatchedRouteException;
 use IvyStreet\Router\Route;
 use IvyStreet\Router\Router;
+
+//register top level directory in DI container
+DIContainer::getInstance()->registerObject("homeDir", $HOMEPATH);
 
 //create our router
 $router = new Router($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

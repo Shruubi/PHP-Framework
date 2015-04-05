@@ -3,6 +3,8 @@
 namespace IvyStreet\Base\Controller;
 
 
+use IvyStreet\Container\DIContainer;
+
 class BaseController {
 
 	/**
@@ -15,5 +17,23 @@ class BaseController {
 	 */
 	function __construct($params = null) {
 		$this->params = $params;
+	}
+
+	/**
+	 * @param string $viewName
+	 * @param string $templateName
+	 */
+	protected function render($viewName, $templateName = null) {
+		$HOME = DIContainer::getInstance()->getObject("homeDir");
+
+		if($templateName === null) {
+			include_once($HOME . 'app/views/' . $viewName . '.php');
+		} else {
+			$renderBody = function() use ($viewName, $HOME) {
+				include_once($HOME . 'app/views/' . $viewName . '.php');
+			};
+
+			include_once($HOME . 'app/views/' . $templateName . '.php');
+		}
 	}
 }
